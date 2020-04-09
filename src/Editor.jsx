@@ -57,8 +57,16 @@ class Editor extends Component {
   getContent = () => this.container.content.innerHTML
 
   render() {
-    return <div ref={e => (this.container = e)} className={this.props.containerClass} />
+    return <div ref={this.setRef} className={this.props.containerClass} />
   }
+
+  setRef = (e) => {
+    this.container = e;
+    if(this.props.onRefUpdate){
+      this.props.onRefUpdate(this.container)
+    }
+  }
+
 }
 
 Editor.propTypes = {
